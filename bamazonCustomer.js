@@ -46,12 +46,43 @@ function inventory () {
 
                 console.log(" * " + itemID + " | " + productName + " | " + deptName + " | " + price + " | " + stockQuantity + "\n");
             }
-            //placeAnOrder();
+            placeAnOrder();
         }
     )
 }
 
 //placeAnOrder FUNCTION -- Takes users order
 function placeAnOrder () {
-k
+    inquirer
+    .prompt ([
+        {
+            type: "input",
+            message: "Enter item ID",
+            name: "itemID"
+        },
+        {
+            type: "input",
+            message: "Enter quantity",
+            name: "quantity"
+        }
+    ])
+    .then(function(response) {
+        connection.query (
+            "SELECT * FROM products WHERE item_id = '" + response.itemID + "'",
+             function(err, res) {
+                if (err) throw err; 
+                if (res[0].stock_quantity < response.quantity) {
+                    console.log("\nSorry! Stock level is too low to fulfill your order.");
+                    // reorder();
+                } else {
+                    console.log("We're fulfilling your order.");
+                    var newQuantity = res[0].stock_quantity - response.quantity;
+                    "UPDATE products SET stock_quantity=" + newQuantity + " WHERE item_id=" + response.itemID,
+                    console.log(newQuantity);
+                    console.log(connection);
+
+                }
+           }
+        )
+    })
 }

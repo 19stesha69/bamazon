@@ -14,5 +14,14 @@ CREATE TABLE products (
 );
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ('')
+VALUES ('Luna Lovegood Spectrespects', 'pop culture', '13.95', '12'),
+       ('Harry Potter Quidditch Goggles', 'pop culture', '19.95', '24'),
+       ('Sunshine Daydream Milk Chocoalte Bar', 'candy', '8.00', '48'),
+       ('Ghana 70% Dark Chocolate', 'candy', '4.00', '24'),
+       ('All Booked Up Shopping Tote', 'accessories', '12.99', '12'),
+       ('Unicorn Shopping Tote', 'accessories', '12.99', '12'),
+       ('Beasties Mug', 'home and garden', '9.99', '8'),
+       ('Beasties Swedish Dishcloth', 'home and garden', '12.99', '9'),
+       ('Barbie Mermaid Enchantress Doll', 'toys', '79.99', '4'),
+       ('Tonka Steel Classic Mighty Dump Truck', 'toys', '24.99', '10');
 
