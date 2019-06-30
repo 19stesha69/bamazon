@@ -29,7 +29,7 @@ var connection = mysql.createConnection({
 
  //INVENTORY FUNCTION  -- Shows inventory on hand
 function inventory () {
-    console.log("\nWelcome to BAM!azon!!! Let's spend some MONEY$$$\n\n");
+    console.log("\n Welcome to BAM!azon!!! Let's spend some MONEY$$$\n\n");
     console.log(" id  |        Product Name         |  Dept. Name |price  | qty");
     connection.query(
         "SELECT * FROM products",
@@ -57,12 +57,12 @@ function placeAnOrder () {
     .prompt ([
         {
             type: "input",
-            message: "Enter item ID",
+            message: " Enter item ID",
             name: "itemID"
         },
         {
             type: "input",
-            message: "Enter quantity",
+            message: " Enter quantity",
             name: "quantity"
         }
     ])
@@ -72,17 +72,46 @@ function placeAnOrder () {
              function(err, res) {
                 if (err) throw err; 
                 if (res[0].stock_quantity < response.quantity) {
-                    console.log("\nSorry! Stock level is too low to fulfill your order.");
-                    // reorder();
+                    console.log("\n Sorry! Stock level is too low to fulfill your order.\n");
+                    reorder();
                 } else {
-                    console.log("We're fulfilling your order.");
+                    console.log("\n We're fulfilling your order.\n");
+                    var chosenID = response.itemID;
                     var newQuantity = res[0].stock_quantity - response.quantity;
-                    "UPDATE products SET stock_quantity=" + newQuantity + " WHERE item_id=" + response.itemID,
-                    console.log(newQuantity);
-                    console.log(connection);
-
+                    var updateSql = "UPDATE products SET stock_quantity = ? WHERE item_id = ?";
+                    var updateSqlData = [newQuantity, chosenID];
+                    connection.query(updateSql, updateSqlData, (error, results, fields) => {
+                        if (error){
+                        return console.error(error.message);
+                        }
+                        //console.log('Rows affected:', results.affectedRows);
+                        var totalAmount = response.quantity * res[0].price;
+                        console.log(" Your total for this transaction: $" + totalAmount + "\n");
+                        reorder();
+                    });
                 }
            }
         )
+    })
+}
+
+function reorder() {
+    inquirer
+    .prompt ([
+        {
+            type: "confirm",
+            message: " Would you like to place another order?\n",
+            name: "reorder"
+        }
+    ])
+    .then(function(response) {
+        var answer = response.reorder;
+        //console.log(response.reorder);
+        if(answer === true) {
+            inventory();
+        } else {
+            console.log("\n Thank you!\n Good Bye.");
+            connection.end();
+        }
     })
 }
