@@ -51,7 +51,7 @@ function inventory () {
     )
 }
 
-//placeAnOrder FUNCTION -- Takes users order
+//placeAnOrder FUNCTION -- TAKES USERS ORDER
 function placeAnOrder () {
     inquirer
     .prompt ([
@@ -95,6 +95,7 @@ function placeAnOrder () {
     })
 }
 
+//REORDER FUNCTION -- RESTARTS ORDER PROCESS/ENDS PROGRAM
 function reorder() {
     inquirer
     .prompt ([
