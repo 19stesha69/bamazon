@@ -58,7 +58,6 @@ function menuOptions() {
             break;
         case "Exit":
             exitOrStay();
-            break;
         }
     })
 }
@@ -192,7 +191,7 @@ function addNewProduct() {
     })
 }
 
-//EXITORSTAY FUNCTION -- ALLOWS USER TO RETURN TO MAIN MENU OR EXIT PROGRAM 
+//EXIT OR STAY FUNCTION -- ALLOWS USER TO RETURN TO MAIN MENU OR EXIT PROGRAM 
  function exitOrStay() {
     inquirer
     .prompt([

@@ -78,17 +78,19 @@ function placeAnOrder () {
                     console.log("\n We're fulfilling your order.\n");
                     var chosenID = response.itemID;
                     var newQuantity = res[0].stock_quantity - response.quantity;
-                    var updateSql = "UPDATE products SET stock_quantity = ? WHERE item_id = ?";
-                    var updateSqlData = [newQuantity, chosenID];
+                    var totalAmount = response.quantity * res[0].price;
+                    var prodSalesTotal =  totalAmount + res[0].product_sales;
+                    var updateSql = "UPDATE products SET stock_quantity = ?, product_sales = ? WHERE item_id = ?";
+                    var updateSqlData = [newQuantity, prodSalesTotal, chosenID];
                     connection.query(updateSql, updateSqlData, (error, results, fields) => {
                         if (error){
                         return console.error(error.message);
                         }
                         //console.log('Rows affected:', results.affectedRows);
-                        var totalAmount = response.quantity * res[0].price;
                         console.log(" Your total for this transaction: $" + totalAmount + "\n");
                         reorder();
                     });
+
                 }
            }
         )
