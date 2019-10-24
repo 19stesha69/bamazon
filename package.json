@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/19stesha69/bamazon#readme",
   "dependencies": {
+    "easy-table": "^1.1.1",
     "inquirer": "^6.4.1",
     "mysql": "^2.17.1"
   }

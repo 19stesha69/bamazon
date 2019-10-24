@@ -4,6 +4,9 @@ var mysql = require("mysql");
 // INQUIRER
 var inquirer = require("inquirer");
 
+//EASY-TABLE
+var easyTable = require('easy-table')
+
 //CONNECTION INFO FOR SQL DATABASE
 var connection = mysql.createConnection({
     host: "localhost",
@@ -44,5 +47,9 @@ var connection = mysql.createConnection({
           }
         //   createNewDept();
       })
+  }
+
+  function summarizedTable() {
+      
   }
   
